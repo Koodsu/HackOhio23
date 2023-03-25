@@ -1,7 +1,7 @@
 import openai
-from dotenv import load_env
+from dotenv import load_dotenv
 import os
-load_env()
+load_dotenv()
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 model_engine = "gpt-3.5-turbo"
@@ -22,7 +22,7 @@ def getGPTResponse(role, text):
     return completion.choices[0]['message']["content"]
 
 
-print(getGPTResponse("system", "what is a cpu"))
+print(getGPTResponse("system", "write an eminem style wrap song about fruit"))
 
 
 
