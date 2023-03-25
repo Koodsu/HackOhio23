@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<form method="POST" action="/forms">
+<form method="POST" action="/form">
     {{ form.hidden_tag() }}
 
     {% for field in form %}
@@ -10,6 +10,7 @@
             {{ field }}
         {% endif %}
     {% endfor %}
+    <input type="submit" value="Submit">
 </form>
 
 {% for field in form %}
