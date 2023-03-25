@@ -1,10 +1,10 @@
 from flask import Flask, render_template
 from forms import forms_blueprint
 from login import login_blueprint
-from dotenv import load_env
+from dotenv import load_dotenv
 import os
 
-load_env()
+load_dotenv()
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
