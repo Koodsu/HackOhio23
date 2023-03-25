@@ -43,6 +43,7 @@ def form():
         # run chatgpt to get todo
         form2 = TodoForm()
         choices = [('sussy', 'Sussy'), ('hello', 'Hello'), ('among us', 'Among Us')]
+        global current_selection
         current_selection = choices
         return analyze(choices)
     return render_template('forms.html', form=form)
