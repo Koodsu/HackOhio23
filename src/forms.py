@@ -4,6 +4,8 @@ from wtforms import StringField, IntegerField, SubmitField, SelectMultipleField,
 from wtforms.widgets import ListWidget, CheckboxInput
 from wtforms.validators import DataRequired
 from flask_simplelogin import is_logged_in
+from fetchgpt import generateTasks, analyzeTasks
+
 from trends import make_graph
 forms_blueprint = Blueprint('forms', __name__, template_folder='templates')
 current_selection = None
@@ -41,9 +43,16 @@ def form():
             'location': form.location.data,
         }
         # run chatgpt to get todo
-        make_graph(data['location'])
+        # make_graph(data['location'])
         form2 = TodoForm()
-        choices = [('sussy', 'Sussy'), ('hello', 'Hello'), ('among us', 'Among Us')]
+
+        string_choices = generateTasks(3, "")
+
+        choices = []
+        for choice in string_choices:
+            choices.append((choice, choice))
+
+        #choices = [('sussy', 'Sussy'), ('hello', 'Hello'), ('among us', 'Among Us')]
         global current_selection
         current_selection = choices
         return analyze(choices)
@@ -62,5 +71,6 @@ def analyze(choices=None):
                 non_selected.append(i[0])
         print("selected", form.todos.data)
         print("non selected", non_selected)
-        return Response('Success', status=204)
+        return render_template('analysis.html', text = analyzeTasks(form.todos.data, non_selected))
+        #return Response('Success', status=204)
     
