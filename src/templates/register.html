@@ -1,11 +1,27 @@
-{% from "_formhelpers.html" import render_field %}
-<form method=post>
-  <dl>
-    {{ render_field(form.username) }}
-    {{ render_field(form.email) }}
-    {{ render_field(form.password) }}
-    {{ render_field(form.confirm) }}
-    {{ render_field(form.accept_tos) }}
-  </dl>
-  <p><input type=submit value=Register>
+{% extends 'base.html' %}
+{% block content %}
+
+<form method="POST" action="/register">
+    {{ form.hidden_tag() }}
+    {{ form.csrf_token }}
+    
+    {% for field in form %}
+        {% if field.type != "CSRFTokenField"%}
+            {{ field.label }}
+            {{ field }}
+        {% endif %}
+    {% endfor %}
+    <input type="submit" value="Submit">
 </form>
+
+{% for field in form %}
+    {% if field.errors %}
+        <ul class="errors">
+        {% for error in field.errors %}
+            <li>{{ error }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+{% endfor %}
+
+{% endblock %}
