@@ -31,7 +31,7 @@ def generate_chat_completion(question, model="gpt-4", temperature=1, max_tokens=
         llm=gpt4
     )
 
-    print(llm_chain.run(question))
+    return llm_chain.run(question)
 
 
 
@@ -59,4 +59,4 @@ def generate_chat_completion(question, model="gpt-4", temperature=1, max_tokens=
 
 
 
-generate_chat_completion("What is Obamas last name")
+print(generate_chat_completion("What is Obamas last name"))
