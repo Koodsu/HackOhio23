@@ -16,6 +16,7 @@ class InformationForm(FlaskForm):
         ('male', 'Male'), ('female', 'Female'), ('other', 'Other')], 
         validators=[DataRequired()])
     hobbies = MultiCheckboxField(choices=[('sussy', 'huh'), ('baka', 'huh')])
+    occupation = StringField('Tell us about your occupation!', validators=[DataRequired()])
     other = StringField('Tell us about your other hobbies!')
     submit = SubmitField('Submit')
 
