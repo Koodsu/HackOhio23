@@ -16,9 +16,9 @@ class InformationForm(FlaskForm):
     gender = RadioField(choices=[
         ('male', 'Male'), ('female', 'Female'), ('other', 'Other')], 
         validators=[DataRequired()])
-    hobbies = MultiCheckboxField(choices=[('sussy', 'huh'), ('baka', 'huh')])
-    hobbies = RadioField(choices=[('whitecolor', 'White Color'), ('bluecolor', 'Blue Color'), ('student', 'Student')])
-    other = StringField('Tell us about your other hobbies!')
+    hobbies = StringField('Hobbies')
+    occupation = RadioField(choices=[('whitecolor', 'White Collar'), ('bluecolor', 'Blue Collar'), ('student', 'Student')])
+    other = StringField('Tell us about you!')
 
 @forms_blueprint.route('/form', methods=['GET', 'POST'])
 def form():
@@ -29,6 +29,7 @@ def form():
     if form.validate_on_submit():
         data = [form.age.data, form.gender.data, form.hobbies.data, form.occupation.data, form.other.data]
         data = [i for i in data if i is not None]
+        print(data)
         todolist = ["sussy", "hello", "among us"]
         return render_template('stuff.html', data=todolist)
     return render_template('forms.html', form=form)

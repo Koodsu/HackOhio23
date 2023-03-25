@@ -8,7 +8,7 @@ from langchain import PromptTemplate
 load_dotenv()
 
 
-template = """Question: {question}
+template = """Write a to do list to be more ecofriendly: {question}
 
 Answer: """
 
