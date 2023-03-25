@@ -1,22 +1,35 @@
 import openai
 from dotenv import load_dotenv
 import os
+import requests
+import json
 load_dotenv()
 
-openai.api_key = os.getenv('OPENAI_API_KEY')
-model_engine = "gpt-3.5-turbo"
+
+API_ENDPOINT = "https://api.openai.com/v1/chat/completions"
 
 max_tokens = 256
 
-def getGPTResponse(role, text, data):
-    prompt = f"{data['name']} is a {data['age']} year old who lives in {data['location']}. He is a {data['occupation']} and likes to do {data['hobbies']}Give me some trends about climate change where he lives and a list of things (specific to where he lives) he can do to help the climate where he lives "
-    message = [{"role" : role, "content" : text}]
+def generate_chat_completion(messages, model="gpt-4", temperature=1, max_tokens=None):
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {os.getenv('OPENAI_API_KEY')}",
+    }
 
-    completion = openai.ChatCompletion.create(
-        model=model_engine,
-        messages=message,
-        max_tokens=max_tokens,
-        temperature=.4,
-    )
+    data = {
+        "model": model,
+        "messages": messages,
+        "temperature": temperature,
+    }
 
-    return completion.choices[0]['message']["content"]
+    if max_tokens is not None:
+        data["max_tokens"] = max_tokens
+
+    response = requests.post(API_ENDPOINT, headers=headers, data=json.dumps(data))
+
+    if response.status_code == 200:
+        return response.json()["choices"][0]["message"]["content"]
+    else:
+        raise Exception(f"Error {response.status_code}: {response.text}")
+
+
