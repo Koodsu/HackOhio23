@@ -3,6 +3,5 @@
 how to run
 - python -m venv venv
 - select workspace in vscode or run /venv/Scripts/activate
-- pip install -r requirements.txt
+- need to pip install: pandas, matplotlib, openai
 - python src/app.py
-- sussy!
