@@ -24,7 +24,7 @@ def form():
     form = InformationForm()
     if form.validate_on_submit():
         data = [form.age.data, form.gender.data, form.hobbies.data, form.occupation.data, form.other.data]
-        data = [i for i in todolist if i is not None]
+        data = [i for i in data if i is not None]
         todolist = ["sussy", "hello", "among us"]
         return render_template('stuff.html', data=todolist)
     return render_template('forms.html', form=form)
