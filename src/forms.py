@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField, SelectMultipleField, RadioField
 from wtforms.widgets import ListWidget, CheckboxInput
 from wtforms.validators import DataRequired
+from flask_simplelogin import login_required
 
 forms_blueprint = Blueprint('forms', __name__, template_folder='templates')
 
@@ -19,6 +20,7 @@ class InformationForm(FlaskForm):
     occupation = StringField('Tell us about your occupation!')
     other = StringField('Tell us about your other hobbies!')
 
+@login_required(basic=True)
 @forms_blueprint.route('/form', methods=['GET', 'POST'])
 def form():
     form = InformationForm()
