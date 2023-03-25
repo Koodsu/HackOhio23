@@ -39,5 +39,9 @@ simple_login = SimpleLogin(app, login_checker=login_checker)
 def hello_world():
     return render_template('index.html')
 
+@app.route('/image')
+def image():
+    return render_template('image.html')
+    
 if __name__ == '__main__':
     app.run(debug=True)

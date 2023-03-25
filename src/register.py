@@ -4,6 +4,7 @@ from wtforms import StringField, PasswordField
 from wtforms.widgets import ListWidget, CheckboxInput
 from wtforms.validators import DataRequired
 from models import db, User
+from trends import make_graph
 
 register_blueprint = Blueprint('register', __name__, template_folder='templates')
 

@@ -4,7 +4,7 @@ from wtforms import StringField, IntegerField, SubmitField, SelectMultipleField,
 from wtforms.widgets import ListWidget, CheckboxInput
 from wtforms.validators import DataRequired
 from flask_simplelogin import is_logged_in
-
+from trends import make_graph
 forms_blueprint = Blueprint('forms', __name__, template_folder='templates')
 current_selection = None
 
@@ -41,6 +41,7 @@ def form():
             'location': form.location.data,
         }
         # run chatgpt to get todo
+        make_graph(data['location'])
         form2 = TodoForm()
         choices = [('sussy', 'Sussy'), ('hello', 'Hello'), ('among us', 'Among Us')]
         global current_selection
