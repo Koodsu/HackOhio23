@@ -5,8 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.css">
+
+    <style>
+        nav {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem 2rem;
+        }
+
+        nav ul {
+        display: flex;
+        list-style: none;
+        }
+
+        nav li {
+        padding-left: 1rem;
+        }
+
+    </style>
+
 </head>
 <body>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}" role="alert"> {{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
     <nav>
         <ul>
             <li><a href="/">Home</a></li>

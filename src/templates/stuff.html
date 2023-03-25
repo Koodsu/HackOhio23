@@ -1,0 +1,12 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<h1> sussy!</h1>
+
+<ul style="list-style-type: none;">
+    {% for item in data %}
+        <li><input type="checkbox">{{item}}</li>
+    {% endfor %}
+</ul>
+{% endblock %}
