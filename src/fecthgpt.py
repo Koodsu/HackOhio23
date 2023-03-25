@@ -1,7 +1,7 @@
 import openai
-from dotenv import load_env
+from dotenv import load_dotenv
 import os
-load_env()
+load_dotenv()
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 model_engine = "gpt-3.5-turbo"
