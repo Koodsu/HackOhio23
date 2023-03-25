@@ -1,17 +1,25 @@
 import openai
 
-openai.api_key = "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"
+openai.api_key = "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"
 model_engine = "gpt-3.5-turbo"
 prompt = "Write an essay about climate change"
 
 max_tokens = 256
 
-messages = [{"role": "system", "content": "Write an essay about climate change"}]
+def getGPTResponse(role, text):
+    message = [{"role" : role, "content" : text}]
 
-completion = openai.ChatCompletion.create(
-    model=model_engine,
-    messages = messages
 
-)
 
-print(completion.choices[0]['message']["content"])
+    completion = openai.ChatCompletion.create(
+        model=model_engine,
+        messages = message
+    )
+
+    return completion.choices[0]['message']["content"]
+
+
+print(getGPTResponse("system", "what is a cpu"))
+
+
+
