@@ -22,7 +22,7 @@ def getGPTResponse(role, text):
     return completion.choices[0]['message']["content"]
 
 
-print(getGPTResponse("system", "what is a cpu"))
+print(getGPTResponse("system", "write an eminem style wrap song about fruit"))
 
 
 
